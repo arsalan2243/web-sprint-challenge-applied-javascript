@@ -64,7 +64,7 @@ const cardAppender = (selector) => {
    keys.forEach(array => {
      array.forEach(item => {
       const card = Card(item)
-      document.querySelector(selector).appenChild(card)
+      document.querySelector(selector).appendChild(card)
      })
    })
 
