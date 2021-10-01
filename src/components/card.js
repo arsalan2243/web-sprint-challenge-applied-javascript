@@ -1,3 +1,6 @@
+ 
+ import axios from 'axios';
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -6,8 +9,8 @@ const Card = (article) => {
   // The tags used, the hierarchy of elements and their attributes must match the provided markup exactly!
   // The text inside elements will be set using their `textContent` property (NOT `innerText`).
   // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
-  //
-  // <div class="card">
+  
+   // <div class="card">
   //   <div class="headline">{ headline }</div>
   //   <div class="author">
   //     <div class="img-container">
@@ -17,9 +20,60 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
+  const card = document.createElement('div')
+  const headline = document.createElement('div')
+  const author = document.createElement('div')           /// all tags are here 
+  const imgContainer = document.createElement('div')
+  const image = document.createElement('img')
+  const span = document.createElement('span')
+
+  card.classList.add('card')
+  headline.classList.add('headline')                  // all needed classse are included here
+  author.classList.add('author')
+  imgContainer.classList.add('img-container')
+  
+
+  headline.textContent = article.headline
+  image.src = article.authorPhoto
+  image.alt = `this is the image of the author ${article.authorName}`
+  span.textContent =  `by ${article.authorName}`
+
+  card.appendChild(headline)
+  card.appendChild(author)
+  author.appendChild(imgContainer)
+  author.appendChild(span)
+  imgContainer.appendChild(image)
+
+
+  card.addEventListener('click', (event) => {
+    console.log(`${article["headline"]}`)
+  })
+ 
+ 
+  return card
 }
 
+
 const cardAppender = (selector) => {
+  
+  axios.get("http://localhost:5000/api/articles")
+  .then((response) => {
+
+    //better way
+  const keys = Object.values(response.data.articles)
+   keys.forEach(array => {
+     array.forEach(item => {
+      const card = Card(item)
+      document.querySelector(selector).appenChild(card)
+     })
+   })
+
+response.data.articles.technology
+  
+})
+
+.catch(error => {console.error(error)})
+  
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
