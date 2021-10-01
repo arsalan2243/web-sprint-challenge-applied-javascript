@@ -70,3 +70,10 @@ Events allow the user to interact with the page, through use of commands such as
 3. What is an event listener?
 
 its a command to detect when an event happens (for example : hover over an object) and then execute a command in response to that.
+
+4. Why would we convert a NodeList into an Array?
+
+NodeList is able to iterate .foreach for us, but it can not do .map. we convert it in order to give ability to iterate .map too.
+
+5. What is a component?
+   Components are reusable codes, that can be used for building style and functionality, which can help to keep the code dry.
